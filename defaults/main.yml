@@ -1,0 +1,8 @@
+---
+# root path of the site cert files
+cert_root_src_path: ""
+cert_dest_path: /home/{{ cert_main_inbox.username }}/.smime/{{ (cert_main_inbox.email).split('@')[1] }}/
+
+cert_main_inbox: {}
+cert_additional_inboxes: []
+cert_inboxes: "{{ [cert_main_inbox] + cert_additional_inboxes }}"

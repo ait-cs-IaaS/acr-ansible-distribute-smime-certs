@@ -1,0 +1,19 @@
+---
+- name: Ensure destination path exists
+  become: true
+  ansible.builtin.file:
+    name: '{{ cert_dest_path }}'
+    state: directory
+    recurse: true
+
+- name: Deploy cert files
+  become: true
+  ansible.builtin.copy:
+    src:
+      "{{ cert_root_src_path }}/{{ (inbox.email).split('@')[1] }}/{{
+      (inbox.email).split('@')[0] }}/{{ (inbox.email).split('@')[0] }}.p12"
+    dest: '{{ cert_dest_path }}/{{ inbox.email_user }}.p12'
+    mode: '0644'
+  loop: '{{ cert_inboxes }}'
+  loop_control:
+    loop_var: inbox
