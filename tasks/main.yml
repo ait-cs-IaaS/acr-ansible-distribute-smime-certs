@@ -17,3 +17,4 @@
   loop: '{{ cert_inboxes }}'
   loop_control:
     loop_var: inbox
+    label: '{{ inbox.email }}'
